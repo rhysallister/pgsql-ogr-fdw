@@ -409,7 +409,11 @@ CREATE SERVER myserver_latin1
 	);
 ```
 
-If you have the postgis_raster extension installed, you may notice that a number of formats will be removed fom the `ogr_fdw_drivers()` list. They can be re-enabled by setting the (`postgis.gdal_enabled_drivers`)[https://postgis.net/docs/postgis_gdal_enabled_drivers.html] to the list of formats/drivers you are interested in using. You can also just set it to 
+If you have the postgis_raster extension installed, you may notice that a number of formats will be removed fom the `ogr_fdw_drivers()` list. They can be re-enabled by setting the [`postgis.gdal_enabled_drivers`](https://postgis.net/docs/postgis_gdal_enabled_drivers.html) config variable to the list of formats/drivers you are interested in using. You can also just set it to `ENABLE_ALL` to enable all drivers. This can be done at the session level or for the entire database.
+
+```sql
+SET postgis.gdal_enabled_drivers TO 'FlatGeobuf GPKG GTiff PNG';
+```
 
 ### GDAL Debugging
 
