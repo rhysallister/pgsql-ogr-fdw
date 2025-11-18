@@ -365,6 +365,19 @@ IMPORT FOREIGN SCHEMA ogr_all
 		launder_column_names 'false'
 	);
 ```
+### Utility Functions
+
+To view the current FDW and GDAL version.
+
+```sql
+SELECT ogr_fdw_version();
+```
+
+To view the drivers supported by this GDAL.
+
+```sql
+SELECT unnest(ogr_fdw_drivers());
+```
 
 ### GDAL Options
 
@@ -396,6 +409,8 @@ CREATE SERVER myserver_latin1
 	);
 ```
 
+If you have the postgis_raster extension installed, you may notice that a number of formats will be removed fom the `ogr_fdw_drivers()` list. They can be re-enabled by setting the (`postgis.gdal_enabled_drivers`)[https://postgis.net/docs/postgis_gdal_enabled_drivers.html] to the list of formats/drivers you are interested in using. You can also just set it to 
+
 ### GDAL Debugging
 
 If you are getting odd behavior and you want to see what GDAL is doing behind the scenes, enable debug logging in your server:
@@ -426,19 +441,7 @@ ALTER SERVER myserver_latin1
 	);
 ```
 
-### Utility Functions
 
-To view the current FDW and GDAL version.
-
-```sql
-SELECT ogr_fdw_version();
-```
-
-To view the drivers supported by this GDAL.
-
-```sql
-SELECT unnest(ogr_fdw_drivers());
-```
 
 
 ### Character Encoding
